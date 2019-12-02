@@ -7,19 +7,20 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        readFlightData();
+        Graph graph = new Graph();
+
+        graph = readFlightData(graph);
 
         readFlightPlans();
     }
 
-    public static void readFlightData() {
+    public static Graph readFlightData(Graph graph) {
         int numOfFlights;
         try {
             // reads the information from the books from a file called flightData.txt
             Scanner input = new Scanner(new File("flightData.txt"));
 
             numOfFlights = Integer.parseInt(input.nextLine());
-
 
             while (input.hasNext()) {
                 String line = input.nextLine();
@@ -43,11 +44,16 @@ public class Main {
                 // store the time
                 int time = Integer.parseInt(line);
 
+                graph.addEdge(origin, destination, cost, time);
+
                 System.out.println(" " + origin + " " + destination + " " + cost + " " + time);
             }
+
         } catch (IOException e) {
             System.out.println("Error reading file");
         }
+
+        return graph;
     }
 
     public static void readFlightPlans() {
@@ -79,7 +85,6 @@ public class Main {
         } catch (IOException e) {
             System.out.println("Error reading file");
         }
-
     }
 
 
