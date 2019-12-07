@@ -72,14 +72,17 @@ public class Graph {
                 else
                     break;
 
+            Boolean isSinglePathEqual = true;
             for (int j = 0; j < existingPath[i].size(); j++){
                 if (!areNodesEqual(existingPath[i].get(j), newPath.get(j))){
-                    return false;
+                    isSinglePathEqual = false;
                 }
             }
+            if (isSinglePathEqual)
+                return true;
         }
 
-        return true;
+        return false;
     }
 
     private Boolean areNodesEqual(Node a, Node b){
