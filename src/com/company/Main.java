@@ -11,7 +11,7 @@ public class Main {
 
         graph = readFlightData(graph);
 
-        readFlightPlans();
+        readFlightPlans(graph);
     }
 
     public static Graph readFlightData(Graph graph) {
@@ -47,6 +47,7 @@ public class Main {
                 graph.addEdge(origin, destination, cost, time);
 
                 System.out.println(" " + origin + " " + destination + " " + cost + " " + time);
+
             }
 
         } catch (IOException e) {
@@ -56,7 +57,7 @@ public class Main {
         return graph;
     }
 
-    public static void readFlightPlans() {
+    public static void readFlightPlans(Graph graph) {
         int numOfFlights;
         try {
             // reads the information from the books from a file called flightPlans.txt
@@ -80,7 +81,10 @@ public class Main {
 
                 String timeOrCost = line;
 
-                System.out.println(origin + " " + destination + " " + timeOrCost);
+                System.out.println(origin + " " + destination + " " + timeOrCost.indexOf(0));
+
+                graph.calculatePaths(origin,destination,timeOrCost.charAt(0));
+
             }
         } catch (IOException e) {
             System.out.println("Error reading file");
